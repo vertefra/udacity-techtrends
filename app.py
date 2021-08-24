@@ -1,18 +1,29 @@
 
-from flask.wrappers import Response
+import os
 from crud.access import get_all_access
 from crud.post import create_post, get_post, get_posts
 from flask import Flask, json, render_template, request, url_for, redirect, flash
-from werkzeug.exceptions import abort
 from db.db import session
-
 from db import db
+
+from log.logger import logging
 
 # Define the Flask application
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your secret key'
 
+# Setting up the logger
+
+app.logger = logging
+
+app_logger = app.logger.getLogger("app")
+
+info = app_logger.info
+debug = app_logger.debug
+error = app_logger.error
+
 # Define the main route of the web application 
+
 @app.route('/')
 def index():
     conn = db.get_db_connection()
@@ -28,13 +39,16 @@ def post(post_id):
     post = get_post(conn, post_id)
     conn.close()
     if post is None:
-      return render_template('404.html'), 404
+        error(f"Article id <{post_id}> does not exists")
+        return render_template('404.html'), 404
     else:
-      return render_template('post.html', post=post)
+        info(f"Article title <{post['title']}> retrieved")
+        return render_template('post.html', post=post)
 
 # Define the About Us page
 @app.route('/about')
 def about():
+    info(f"About us retrieved")
     return render_template('about.html')
 
 #  Health Status endpoint
@@ -62,6 +76,7 @@ def create():
             conn = db.get_db_connection()
             create_post(conn, title, content)
             conn.close()
+            info(f"Article title<{title}> created")
             return redirect(url_for('index'))
 
     return render_template('create.html')
@@ -78,10 +93,15 @@ def metrics():
             'post_count': len(posts)
         })
     )
-
+ 
     return response
-
 
 # start the application on port 3111
 if __name__ == "__main__":
-   app.run(host='0.0.0.0', port='3111', debug=True)
+    DEBUG = os.getenv("DEBUG")
+
+    if DEBUG is None:
+        DEBUG = False
+    else:
+        DEBUG = bool(DEBUG)
+    app.run(host='0.0.0.0', port='3111', debug=DEBUG)
