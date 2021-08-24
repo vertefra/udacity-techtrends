@@ -1,5 +1,12 @@
 set -x
 
-export TAG='techtrend:0.0.1'
+if [[ ! $IMAGE_NAME ]]; then
+    IMAGE_NAME='vertefra/techtrends'
+fi
+
+if [[ ! $TAG ]]; then
+    TAG='latest'
+fi
+
 echo "Image tag: " $TAG
-docker build -t=$TAG .
+docker build -t=$IMAGE_NAME:$TAG .
