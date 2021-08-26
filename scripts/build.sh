@@ -8,5 +8,4 @@ if [[ ! $TAG ]]; then
     TAG='latest'
 fi
 
-echo "Image tag: " $TAG
 docker build -t=$IMAGE_NAME:$TAG .

@@ -4,12 +4,12 @@
 
 ### Application building:
 ```bash
-docker build -t=$TAG .
+docker build -t=$IMAGE_NAME:$TAG .
 ```
 
 ### Application run
 ```bash
-docker run -n techtrends -v $(pwd)/:/app -p $HOST_PORT:$DOCKER_PORT $TAG
+docker run -n techtrends -d -v $(pwd)/:/app -p $HOST_PORT:$DOCKER_PORT $TAG
 ```
 
 ## Docker commands used to get the application logs

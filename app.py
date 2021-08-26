@@ -58,8 +58,6 @@ def healthz():
         response=json.dumps({
             "result": "OK - healthy",
         }),
-        status_code=200,
-        mimeType='application/json'
     )
     return response
 
