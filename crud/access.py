@@ -1,5 +1,5 @@
 from sqlite3.dbapi2 import Connection
-from datetime import date, datetime
+from datetime import datetime
 
 def start_session(conn: Connection) -> datetime:
     '''

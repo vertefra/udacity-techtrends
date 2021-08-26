@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - image: vertefra/techtrends:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always      
         name: techtrends
         ports:
         - containerPort: 3111
@@ -35,7 +35,7 @@ spec:
             path: /healthz
             port: 3111
 
-        resources: 
+        resources:
           requests:
             cpu: 250m
             memory: 54Mi
