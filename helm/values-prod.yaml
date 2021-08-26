@@ -6,6 +6,9 @@ service:
 
 replicaCount: 5
 
+image:
+  tag: prod
+
 resources:
   requests:
     cpu:  250m
