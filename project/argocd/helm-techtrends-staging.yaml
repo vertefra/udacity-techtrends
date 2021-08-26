@@ -7,14 +7,14 @@ spec:
   destination:
     namespace: default
     server: https://kubernetes.default.svc
-  project: techtrends
+  project: default
   source:
     helm:
       valueFiles:
       - values.yaml
       - values-staging.yaml
-      path: helm
-      repoURL: https://github.com/vertefra/udacity-techtrends
-      targetRevision: staging
+    path: helm
+    repoURL: https://github.com/vertefra/udacity-techtrends
+    targetRevision: staging
 
   syncPolicy: {}

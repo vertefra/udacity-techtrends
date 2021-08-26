@@ -1,16 +1,16 @@
-name: Build and Push
+name: Build and Push Production
 
 on:
   push:
     branches:
-      - master
+      - staging
 
 jobs:
   build-push:
     runs-on: ubuntu-latest
     env:
       IMAGE_NAME: vertefra/techtrends
-      TAG: latest
+      TAG: stag
     steps:
       - name: Checkout
         uses: actions/checkout@v2
