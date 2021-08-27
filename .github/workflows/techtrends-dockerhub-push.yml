@@ -22,4 +22,28 @@ jobs:
       - name: Build and Push
         run: |
           bash ./scripts/build.sh && \
+          bash ./scripts/push.sh
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-push:
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: vertefra/techtrends
+      TAG: prod
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Login
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and Push
+        run: |
+          bash ./scripts/build.sh && \
           bash ./scripts/push.sh 
