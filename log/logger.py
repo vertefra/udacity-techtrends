@@ -12,6 +12,6 @@ handlers = [stdout_handler, stderror_handler]
 logging.basicConfig(
     level=logging.DEBUG,
     format="%(levelname)s:%(name)s - - [%(asctime)s] %(message)s",
-    datefmt='%d-%b-%Y %H:%M:%S',
-    handlers=handlers
+    datefmt="%d-%b-%Y %H:%M:%S",
+    handlers=handlers,
 )
