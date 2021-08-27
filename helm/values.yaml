@@ -7,7 +7,7 @@ service:
   type: ClusterIP
 
 image:
-  repository: vertfra/techtrends
+  repository: vertefra/techtrends
   tag: latest
   pullPolicy: IfNotPresent
 
