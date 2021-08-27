@@ -1,16 +1,15 @@
-name: Build and Push Production
 
 on:
   push:
     branches:
-      - staging
+      - master
 
 jobs:
   build-push:
     runs-on: ubuntu-latest
     env:
       IMAGE_NAME: vertefra/techtrends
-      TAG: stag
+      TAG: prod
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -22,4 +21,4 @@ jobs:
       - name: Build and Push
         run: |
           bash ./scripts/build.sh && \
-          bash ./scripts/push.sh
+          bash ./scripts/push.sh 
